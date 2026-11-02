@@ -1,7 +1,6 @@
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import { BankTransaction } from '../types/bank';
 import { BANKS, COMPANY_INFO } from '../data/seedData';
-import { enhanceWorksheetFormatting } from './excelExporter';
 
 export interface InternalTransferAuditItem {
   id: string;
@@ -42,7 +41,6 @@ export function getInternalTransfersAuditList(transactions: BankTransaction[]): 
       else if (descUpper.includes('PROVINCIAL')) receivingBankName = 'BBVA Banco Provincial';
       else if (descUpper.includes('VENEZUELA')) receivingBankName = 'Banco de Venezuela';
 
-      // Verificar si la cuenta destino Banesco o interna está a nombre de la EMPRESA o del DUEÑO
       let holderName = `${COMPANY_INFO.name} (RIF: ${COMPANY_INFO.rif})`;
       let holderType: 'EMPRESA (AGRÍCOLA ONI C.A.)' | 'DUEÑO / SOCIO (ELÍAS TRÍAS)' | 'OTRO' = 'EMPRESA (AGRÍCOLA ONI C.A.)';
       let accDest = '0134-0401-13-4011117562';
@@ -58,7 +56,7 @@ export function getInternalTransfersAuditList(transactions: BankTransaction[]): 
       auditList.push({
         id: tx.id,
         date: tx.date,
-        month: tx.date.substring(0, 7), // YYYY-MM
+        month: tx.date.substring(0, 7),
         emittingBank: emittingBankName,
         receivingBank: receivingBankName,
         reference: tx.reference,
@@ -78,37 +76,42 @@ export function getInternalTransfersAuditList(transactions: BankTransaction[]): 
 }
 
 /**
- * Genera y descarga el reporte Excel especializado de Transferencias Internas y Cuentas Banesco
+ * Genera y descarga el reporte Excel especializado de Transferencias Internas y Cuentas Banesco con ExcelJS
  */
-export function exportInternalTransfersAuditExcel(transactions: BankTransaction[]) {
-  const workbook = XLSX.utils.book_new();
+export async function exportInternalTransfersAuditExcel(transactions: BankTransaction[]) {
+  const workbook = new ExcelJS.Workbook();
+  const sheet = workbook.addWorksheet('Auditoría Trfs Internas');
+  sheet.views = [{ showGridLines: true }];
+
+  // Banner
+  const titleRow = sheet.addRow(['BANCO EXPRESS - AUDITORÍA ESPECIAL DE TRANSFERENCIAS INTERNAS Y CUENTAS BANESCO']);
+  sheet.mergeCells(1, 1, 1, 13);
+  titleRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0F172A' } };
+  titleRow.getCell(1).font = { name: 'Arial', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
+  titleRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'center' };
+  titleRow.height = 30;
+
+  sheet.addRow([`EMPRESA: ${COMPANY_INFO.name}`, `RIF: ${COMPANY_INFO.rif}`]);
+  sheet.addRow([`SOCIO PRINCIPAL: ${COMPANY_INFO.partner.name}`, `C.I.: ${COMPANY_INFO.partner.cedula}`]);
+  sheet.addRow(['VERIFICACIÓN AUDITADA SI LA TRANSFERENCIA A BANESCO FUE A NOMBRE DE LA EMPRESA O DEL DUEÑO']);
+  sheet.addRow([]);
+
+  const headerRow = sheet.addRow([
+    'FECHA', 'MES', 'BANCO ORIGEN', 'BANCO DESTINO', 'REFERENCIA',
+    'DESCRIPCIÓN', 'TITULAR EN DESTINO', 'TIPO TITULAR', 'N° CUENTA DESTINO',
+    'MONTO (Bs.)', 'TASA BCV', 'MONTO ($ USD)', 'DIAGNÓSTICO AUDITORÍA'
+  ]);
+  headerRow.height = 24;
+  headerRow.eachCell(cell => {
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E3A8A' } };
+    cell.font = { name: 'Arial', size: 9, bold: true, color: { argb: 'FFFFFFFF' } };
+    cell.alignment = { vertical: 'middle', horizontal: 'center' };
+  });
+
   const auditItems = getInternalTransfersAuditList(transactions);
 
-  const rows: any[] = [];
-  rows.push(['BANCO EXPRESS - AUDITORÍA ESPECIAL DE TRANSFERENCIAS INTERNAS Y CUENTAS BANESCO']);
-  rows.push([`EMPRESA: ${COMPANY_INFO.name}`, `RIF: ${COMPANY_INFO.rif}`]);
-  rows.push([`DUEÑO / SOCIO PRINCIPAL: ${COMPANY_INFO.partner.name}`, `C.I.: ${COMPANY_INFO.partner.cedula}`]);
-  rows.push(['VERIFICACIÓN SI LA TRANSFERENCIA A BANESCO FUE A NOMBRE DE LA EMPRESA O DEL DUEÑO']);
-  rows.push([]);
-
-  rows.push([
-    'FECHA',
-    'MES',
-    'BANCO ORIGEN (EMISOR)',
-    'BANCO DESTINO (RECEPTOR)',
-    'N° REFERENCIA',
-    'DESCRIPCIÓN EN ESTADO DE CUENTA',
-    'TITULAR EN CUENTA DESTINO BANESCO',
-    'TIPO DE TITULAR DESTINO',
-    'N° CUENTA DESTINO',
-    'MONTO EN BOLÍVARES (Bs.)',
-    'TASA BCV DEL DÍA (Bs/$)',
-    'MONTO EN DÓLARES ($ USD)',
-    'DIAGNÓSTICO DE AUDITORÍA'
-  ]);
-
-  auditItems.forEach(item => {
-    rows.push([
+  auditItems.forEach((item, idx) => {
+    const row = sheet.addRow([
       item.date,
       item.month,
       item.emittingBank,
@@ -123,48 +126,64 @@ export function exportInternalTransfersAuditExcel(transactions: BankTransaction[
       item.amountUSD,
       item.auditNote
     ]);
+
+    row.height = 19;
+    row.eachCell((cell, colIndex) => {
+      cell.font = { name: 'Calibri', size: 9.5 };
+      if (idx % 2 === 1) {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF8FAFC' } };
+      }
+      cell.border = {
+        top: { style: 'thin', color: { argb: 'FFE2E8F0' } },
+        bottom: { style: 'thin', color: { argb: 'FFE2E8F0' } }
+      };
+
+      if (colIndex === 10) {
+        cell.numFmt = '#,##0.00;[Red](#,##0.00);"-"';
+        cell.alignment = { horizontal: 'right' };
+      } else if (colIndex === 11) {
+        cell.numFmt = '#,##0.0000';
+        cell.alignment = { horizontal: 'right' };
+      } else if (colIndex === 12) {
+        cell.numFmt = '"$"#,##0.00;[Red]("$"#,##0.00);"-"';
+        cell.alignment = { horizontal: 'right' };
+      }
+    });
   });
 
   const totalBs = auditItems.reduce((acc, item) => acc + Math.abs(item.amountBs), 0);
   const totalUSD = auditItems.reduce((acc, item) => acc + item.amountUSD, 0);
 
-  rows.push([]);
-  rows.push([
-    'TOTAL OPERACIONES INTERNAS Y BANESCO AUDITADAS',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    totalBs,
-    '',
-    totalUSD,
-    `${auditItems.length} Operaciones Registradas`
+  const totRow = sheet.addRow([
+    'TOTAL AUDITADO', '', '', '', '', '', '', '', '',
+    totalBs, '', totalUSD, `${auditItems.length} Operaciones`
   ]);
+  totRow.height = 24;
+  totRow.eachCell((cell, colIndex) => {
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEF3C7' } };
+    cell.font = { name: 'Arial', size: 9.5, bold: true, color: { argb: 'FF0F172A' } };
+    cell.border = { top: { style: 'thin' }, bottom: { style: 'double' } };
+    if (colIndex === 10) cell.numFmt = '#,##0.00';
+    if (colIndex === 12) cell.numFmt = '"$"#,##0.00';
+  });
 
-  const sheet = XLSX.utils.aoa_to_sheet(rows);
-  sheet['!cols'] = [
-    { wch: 12 },
-    { wch: 10 },
-    { wch: 25 },
-    { wch: 25 },
-    { wch: 16 },
-    { wch: 50 },
-    { wch: 45 },
-    { wch: 32 },
-    { wch: 28 },
-    { wch: 22 },
-    { wch: 20 },
-    { wch: 20 },
-    { wch: 45 }
-  ];
+  sheet.columns.forEach(col => {
+    let maxLen = 12;
+    col.eachCell?.({ includeEmpty: false }, cell => {
+      const str = cell.value ? String(cell.value) : '';
+      if (!str.startsWith('BANCO EXPRESS') && str.length < 80) {
+        if (str.length > maxLen) maxLen = str.length;
+      }
+    });
+    col.width = Math.min(60, maxLen + 4);
+  });
 
-  enhanceWorksheetFormatting(sheet);
-  XLSX.utils.book_append_sheet(workbook, sheet, 'Auditoría Trfs Internas');
-
-  const filename = `BANCO_EXPRESS_Auditoria_Transferencias_Internas_y_Banesco.xlsx`;
-  XLSX.writeFile(workbook, filename);
+  const buffer = await workbook.xlsx.writeBuffer();
+  const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `BANCO_EXPRESS_Auditoria_Transferencias_Internas_y_Banesco.xlsx`;
+  a.click();
+  window.URL.revokeObjectURL(url);
 }

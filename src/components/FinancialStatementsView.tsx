@@ -49,10 +49,10 @@ export const FinancialStatementsView: React.FC<FinancialStatementsViewProps> = (
               </span>
             </div>
             <h2 className="text-2xl font-black mt-2 tracking-tight flex items-center gap-2 text-white">
-              <span>ESTADOS FINANCIEROS AUDITADOS (BANESCO + MULTIBANCO)</span>
+              <span>ESTADOS FINANCIEROS CERTIFICADOS (VEN-NIF PYME)</span>
             </h2>
             <p className="text-xs text-slate-300 font-semibold mt-1">
-              Empresa: <strong className="text-white">{COMPANY_INFO.name}</strong> ({COMPANY_INFO.rif}) · Representante Legal: <strong className="text-white">{COMPANY_INFO.partner.name}</strong> ({COMPANY_INFO.partner.cedula})
+              Empresa: <strong className="text-white">{COMPANY_INFO.name}</strong> ({COMPANY_INFO.rif}) · Representante Legal: <strong className="text-white">{COMPANY_INFO.partner.name}</strong> ({COMPANY_INFO.partner.cedula}) · Contador Público: <strong className="text-white">{COMPANY_INFO.accountant.name}</strong> ({COMPANY_INFO.accountant.cpc})
             </p>
           </div>
 
@@ -63,7 +63,7 @@ export const FinancialStatementsView: React.FC<FinancialStatementsViewProps> = (
               title="Descargar Balance General, Estado de Resultados y Balance de Comprobación en Excel profesional para entregar al banco"
             >
               <FileSpreadsheet className="w-4 h-4" />
-              <span>Descargar EEFF Auditados para Banco (.xlsx)</span>
+              <span>Descargar EEFF Certificados para Banco (.xlsx)</span>
             </button>
           </div>
         </div>
@@ -114,6 +114,18 @@ export const FinancialStatementsView: React.FC<FinancialStatementsViewProps> = (
       {activeSubTab === 'balance' && (
         <div className="space-y-6">
           
+          {/* Encabezado Oficial de 4 Líneas */}
+          <div className="bg-white rounded-2xl border-2 border-slate-300 p-5 text-center shadow-xs space-y-1">
+            <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">{COMPANY_INFO.name}</h2>
+            <h3 className="text-sm font-bold text-slate-700 font-mono">R.I.F.: {COMPANY_INFO.rif}</h3>
+            <h4 className="text-sm font-extrabold text-[#7A00F2] uppercase tracking-wide">
+              ESTADO DE SITUACIÓN FINANCIERA (BALANCE GENERAL) AL 31 DE AGOSTO DE 2026
+            </h4>
+            <p className="text-xs font-bold text-slate-500 italic">
+              Expresado en Bolívares (Bs.) y en Dólares ($ USD)
+            </p>
+          </div>
+
           {/* Badge de Verificación de Cuadre */}
           <div className="bg-emerald-500/10 border-2 border-emerald-400 rounded-2xl p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -339,86 +351,101 @@ export const FinancialStatementsView: React.FC<FinancialStatementsViewProps> = (
       {/* 2. ESTADO DE GANANCIAS Y PÉRDIDAS (ESTADO DE RESULTADOS) */}
       {/* ------------------------------------------------------------- */}
       {activeSubTab === 'income' && (
-        <div className="bg-white rounded-2xl border-2 border-slate-200 shadow-sm p-6 space-y-6">
-          <div className="flex items-center justify-between border-b-2 border-slate-200 pb-4">
-            <div>
-              <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-[#0033FF]" />
-                <span>Estado de Ganancias y Pérdidas (Estado de Resultados)</span>
-              </h3>
-              <p className="text-xs text-slate-600 font-semibold mt-0.5">
-                Resumen de Ingresos, Gastos Operacionales y Resultado Neto en Bolívares y Dólares Oficiales BCV.
-              </p>
-            </div>
-            <div className="text-right">
-              <span className="text-xs text-slate-500 font-bold block">Resultado Neto del Período</span>
-              <span className={`text-lg font-mono font-black ${
-                incomeStatement.netProfitBs >= 0 ? 'text-[#00C814]' : 'text-[#E52320]'
-              }`}>
-                {formatBs(incomeStatement.netProfitBs)} ({formatUSD(incomeStatement.netProfitUSD)})
-              </span>
-            </div>
+        <div className="space-y-6">
+
+          {/* Encabezado Oficial de 4 Líneas */}
+          <div className="bg-white rounded-2xl border-2 border-slate-300 p-5 text-center shadow-xs space-y-1">
+            <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">{COMPANY_INFO.name}</h2>
+            <h3 className="text-sm font-bold text-slate-700 font-mono">R.I.F.: {COMPANY_INFO.rif}</h3>
+            <h4 className="text-sm font-extrabold text-[#0033FF] uppercase tracking-wide">
+              ESTADO DE RESULTADOS INTEGRALES (GANANCIAS Y PÉRDIDAS) DEL 01 DE ENERO AL 31 DE AGOSTO DE 2026
+            </h4>
+            <p className="text-xs font-bold text-slate-500 italic">
+              Expresado en Bolívares (Bs.) y en Dólares ($ USD)
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            {/* INGRESOS OPERACIONALES */}
-            <div className="bg-emerald-500/5 border-2 border-emerald-300 rounded-2xl p-5 space-y-3">
-              <h4 className="text-xs font-black text-[#00800C] uppercase tracking-wider flex items-center gap-1.5">
-                <ArrowUpRight className="w-4 h-4 text-[#00C814]" />
-                <span>1. INGRESOS OPERACIONALES</span>
-              </h4>
-              <div className="divide-y divide-emerald-200/60 text-xs">
-                {incomeStatement.incomeBreakdown.map((item, idx) => (
-                  <div key={idx} className="py-2.5 flex justify-between font-bold text-slate-800">
-                    <span>{item.concept}</span>
-                    <div className="text-right font-mono">
-                      <span className="text-[#00C814] font-black">{formatBs(item.amountBs)}</span>
-                      <span className="text-slate-500 text-[11px] block">{formatUSD(item.amountUSD)}</span>
+          <div className="bg-white rounded-2xl border-2 border-slate-200 shadow-sm p-6 space-y-6">
+            <div className="flex items-center justify-between border-b-2 border-slate-200 pb-4">
+              <div>
+                <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-[#0033FF]" />
+                  <span>Estado de Ganancias y Pérdidas (Estado de Resultados)</span>
+                </h3>
+                <p className="text-xs text-slate-600 font-semibold mt-0.5">
+                  Resumen de Ingresos, Gastos Operacionales y Resultado Neto en Bolívares y Dólares Oficiales BCV.
+                </p>
+              </div>
+              <div className="text-right">
+                <span className="text-xs text-slate-500 font-bold block">Resultado Neto del Período</span>
+                <span className={`text-lg font-mono font-black ${
+                  incomeStatement.netProfitBs >= 0 ? 'text-[#00C814]' : 'text-[#E52320]'
+                }`}>
+                  {formatBs(incomeStatement.netProfitBs)} ({formatUSD(incomeStatement.netProfitUSD)})
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* INGRESOS OPERACIONALES */}
+              <div className="bg-emerald-500/5 border-2 border-emerald-300 rounded-2xl p-5 space-y-3">
+                <h4 className="text-xs font-black text-[#00800C] uppercase tracking-wider flex items-center gap-1.5">
+                  <ArrowUpRight className="w-4 h-4 text-[#00C814]" />
+                  <span>1. INGRESOS OPERACIONALES</span>
+                </h4>
+                <div className="divide-y divide-emerald-200/60 text-xs">
+                  {incomeStatement.incomeBreakdown.map((item, idx) => (
+                    <div key={idx} className="py-2.5 flex justify-between font-bold text-slate-800">
+                      <span>{item.concept}</span>
+                      <div className="text-right font-mono">
+                        <span className="text-[#00C814] font-black">{formatBs(item.amountBs)}</span>
+                        <span className="text-slate-500 text-[11px] block">{formatUSD(item.amountUSD)}</span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <div className="pt-2 border-t border-emerald-300 flex justify-between text-xs font-black text-[#00800C] font-mono">
+                  <span>TOTAL INGRESOS OPERACIONALES</span>
+                  <span>{formatBs(incomeStatement.totalIncomeBs)}</span>
+                </div>
               </div>
-              <div className="pt-2 border-t border-emerald-300 flex justify-between text-xs font-black text-[#00800C] font-mono">
-                <span>TOTAL INGRESOS OPERACIONALES</span>
-                <span>{formatBs(incomeStatement.totalIncomeBs)}</span>
-              </div>
-            </div>
 
-            {/* GASTOS Y COSTOS OPERACIONALES */}
-            <div className="bg-rose-500/5 border-2 border-rose-300 rounded-2xl p-5 space-y-3">
-              <h4 className="text-xs font-black text-[#E52320] uppercase tracking-wider flex items-center gap-1.5">
-                <ArrowDownLeft className="w-4 h-4 text-[#E52320]" />
-                <span>2. GASTOS Y COSTOS OPERACIONALES</span>
-              </h4>
-              <div className="divide-y divide-rose-200/60 text-xs">
-                {incomeStatement.expenseBreakdown.map((item, idx) => (
-                  <div key={idx} className="py-2.5 flex justify-between font-bold text-slate-800">
-                    <span>{item.concept}</span>
-                    <div className="text-right font-mono">
-                      <span className="text-[#E52320] font-black">{formatBs(item.amountBs)}</span>
-                      <span className="text-slate-500 text-[11px] block">{formatUSD(item.amountUSD)}</span>
+              {/* GASTOS Y COSTOS OPERACIONALES */}
+              <div className="bg-rose-500/5 border-2 border-rose-300 rounded-2xl p-5 space-y-3">
+                <h4 className="text-xs font-black text-[#E52320] uppercase tracking-wider flex items-center gap-1.5">
+                  <ArrowDownLeft className="w-4 h-4 text-[#E52320]" />
+                  <span>2. GASTOS Y COSTOS OPERACIONALES</span>
+                </h4>
+                <div className="divide-y divide-rose-200/60 text-xs">
+                  {incomeStatement.expenseBreakdown.map((item, idx) => (
+                    <div key={idx} className="py-2.5 flex justify-between font-bold text-slate-800">
+                      <span>{item.concept}</span>
+                      <div className="text-right font-mono">
+                        <span className="text-[#E52320] font-black">{formatBs(item.amountBs)}</span>
+                        <span className="text-slate-500 text-[11px] block">{formatUSD(item.amountUSD)}</span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <div className="pt-2 border-t border-rose-300 flex justify-between text-xs font-black text-[#E52320] font-mono">
+                  <span>TOTAL GASTOS Y COSTOS</span>
+                  <span>{formatBs(incomeStatement.totalExpenseBs)}</span>
+                </div>
               </div>
-              <div className="pt-2 border-t border-rose-300 flex justify-between text-xs font-black text-[#E52320] font-mono">
-                <span>TOTAL GASTOS Y COSTOS</span>
-                <span>{formatBs(incomeStatement.totalExpenseBs)}</span>
-              </div>
+
             </div>
 
-          </div>
-
-          {/* BANNER DE UTILIDAD NETAS */}
-          <div className="bg-[#111827] text-white p-5 rounded-2xl flex items-center justify-between font-mono">
-            <div>
-              <span className="text-xs text-[#F9E08A] font-black uppercase tracking-wider block">UTILIDAD / RESULTADO NETO DE LAS OPERACIONES</span>
-              <span className="text-xs text-slate-400">Calculado a la tasa diaria BCV de cada transacción</span>
-            </div>
-            <div className="text-right">
-              <span className="text-xl font-black text-[#00C814] block">{formatBs(incomeStatement.netProfitBs)}</span>
-              <span className="text-sm text-slate-300 font-bold">{formatUSD(incomeStatement.netProfitUSD)}</span>
+            {/* BANNER DE UTILIDAD NETAS */}
+            <div className="bg-[#111827] text-white p-5 rounded-2xl flex items-center justify-between font-mono">
+              <div>
+                <span className="text-xs text-[#F9E08A] font-black uppercase tracking-wider block">UTILIDAD / RESULTADO NETO DE LAS OPERACIONES</span>
+                <span className="text-xs text-slate-400">Calculado a la tasa diaria BCV de cada transacción</span>
+              </div>
+              <div className="text-right">
+                <span className="text-xl font-black text-[#00C814] block">{formatBs(incomeStatement.netProfitBs)}</span>
+                <span className="text-sm text-slate-300 font-bold">{formatUSD(incomeStatement.netProfitUSD)}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -428,7 +455,19 @@ export const FinancialStatementsView: React.FC<FinancialStatementsViewProps> = (
       {/* 3. BALANCE DE COMPROBACIÓN (SUMAS Y SALDOS) */}
       {/* ------------------------------------------------------------- */}
       {activeSubTab === 'trial' && (
-        <div className="bg-white rounded-2xl border-2 border-slate-200 shadow-sm overflow-hidden">
+        <div className="space-y-6">
+
+          {/* Encabezado Oficial de 4 Líneas */}
+          <div className="bg-white rounded-2xl border-2 border-slate-300 p-5 text-center shadow-xs space-y-1">
+            <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">{COMPANY_INFO.name}</h2>
+            <h3 className="text-sm font-bold text-slate-700 font-mono">R.I.F.: {COMPANY_INFO.rif}</h3>
+            <h4 className="text-sm font-extrabold text-[#FF8800] uppercase tracking-wide">
+              BALANCE DE COMPROBACIÓN DE SUMAS Y SALDOS AL 31 DE AGOSTO DE 2026
+            </h4>
+            <p className="text-xs font-bold text-slate-500 italic">
+              Expresado en Bolívares (Bs.) y en Dólares ($ USD)
+            </p>
+          </div>
           <div className="p-4 bg-slate-100/80 border-b-2 border-slate-200 flex items-center justify-between">
             <div>
               <h3 className="text-base font-black text-slate-900 flex items-center gap-2">

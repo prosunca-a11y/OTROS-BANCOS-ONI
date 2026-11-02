@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   Building2, 
   ArrowLeftRight, 
@@ -8,12 +7,14 @@ import {
   Receipt, 
   CheckCircle2,
   FileSpreadsheet,
+  FileText,
   Layers,
   PieChart
 } from 'lucide-react';
 import { BankTransaction } from '../types/bank';
 import { BANKS, CATEGORIES, COMPANY_INFO, SEED_INITIAL_BALANCES } from '../data/seedData';
 import { formatBs, formatUSD } from '../utils/exchangeRates';
+import { exportConsolidatedSummaryPDF } from '../utils/pdfExporter';
 
 interface ConsolidatedViewProps {
   transactions: BankTransaction[];
@@ -55,13 +56,25 @@ export const ConsolidatedView: React.FC<ConsolidatedViewProps> = ({
           </p>
         </div>
 
-        <button
-          onClick={onExportExcel}
-          className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-2 self-start md:self-auto cursor-pointer"
-        >
-          <FileSpreadsheet className="w-4 h-4" />
-          <span>Exportar Consolidado a Excel</span>
-        </button>
+        <div className="flex items-center gap-2.5 flex-wrap self-start md:self-auto">
+          <button
+            onClick={() => exportConsolidatedSummaryPDF(transactions, 'Enero-Agosto 2026')}
+            className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+            title="Descargar Informe Ejecutvo Consolidado en formato PDF para el banco"
+          >
+            <FileText className="w-4 h-4" />
+            <span>Exportar Consolidado a PDF</span>
+          </button>
+
+          <button
+            onClick={onExportExcel}
+            className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+            title="Descargar Informe Ejecutivo Consolidado en formato Excel (.xlsx)"
+          >
+            <FileSpreadsheet className="w-4 h-4" />
+            <span>Exportar Consolidado a Excel</span>
+          </button>
+        </div>
       </div>
 
       {/* Tarjetas KPI de Resumen Global */}

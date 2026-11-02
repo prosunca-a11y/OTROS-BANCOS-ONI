@@ -3,14 +3,24 @@ import { OFFICIAL_BCV_RATES_2026 } from './bcvRates2026';
 import { getRateForDate, calculateUSDAmount } from '../utils/exchangeRates';
 
 export const COMPANY_INFO = {
-  name: 'AGRICOLA ONI, C.A.',
+  name: 'AGRÍCOLA ONI, C.A.',
   rif: 'J-50145638-0',
   rifRaw: 'J501456380',
+  activity: 'INTERMEDIACIÓN COMERCIAL · COMPRA DE CAFÉ NACIONAL A TASA BCV',
+  address: 'Calle Las Flores, Quinta Blanquita, Local 2, Crucero de Lechería, Barcelona, Estado Anzoátegui.',
+  phones: '+58 (281) 286-8492 / +58 (414) 819-1044',
+  email: 'administracion@agricolaoni.com.ve',
   partner: {
-    name: 'ELIAS RAFAEL TRIAS ABREU',
-    shortName: 'ELIAS TRIAS',
+    name: 'ELÍAS RAFAEL TRÍAS ABREU',
+    shortName: 'ELÍAS TRÍAS',
     cedula: 'V-23997829',
-    cedulaRaw: 'V23997829'
+    cedulaRaw: 'V23997829',
+    title: 'Presidente / Representante Legal'
+  },
+  accountant: {
+    name: 'Lcdo. Omar Pérez Castillo',
+    cpc: 'C.P.C. 16.336',
+    title: 'Contador Público Colegiado Independiente'
   }
 };
 
