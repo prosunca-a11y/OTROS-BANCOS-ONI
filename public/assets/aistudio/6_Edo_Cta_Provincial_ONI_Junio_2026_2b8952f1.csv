@@ -1,0 +1,13 @@
+﻿F. Operación,Ref.,Concepto,F. Valor,Tipo de operación,Banco destino,Cargos (Bs.),Abonos (Bs.),Saldo según banco (Bs.),Verificación
+,,SALDO ANTERIOR,,,,,,"4,195.24",
+17/06/2026,2896,TRA8811785000033878,17/06/2026,Transferencia / traspaso recibido,,,"11,935,648.00","11,939,843.24",OK
+17/06/2026,2897,CR.I/OB 53941727 ONI BANESCO 0134,17/06/2026,Crédito inmediato enviado,Banesco,"5,000,000.00",,"6,939,843.24",OK
+17/06/2026,2898,COMIS. CR.I OB,17/06/2026,Comisión crédito inmediato,,"15,000.00",,"6,924,843.24",OK
+17/06/2026,2899,CR.I/OB 53941963 ONI BANESCO 0134,17/06/2026,Crédito inmediato enviado,Banesco,"4,900,000.00",,"2,024,843.24",OK
+17/06/2026,2900,COMIS. CR.I OB,17/06/2026,Comisión crédito inmediato,,"14,700.00",,"2,010,143.24",OK
+17/06/2026,2901,CR.I/OB 53942105 ONI BANESCO 0134,17/06/2026,Crédito inmediato enviado,Banesco,"2,000,000.00",,"10,143.24",OK
+17/06/2026,2902,COMIS. CR.I OB,17/06/2026,Comisión crédito inmediato,,"6,000.00",,"4,143.24",OK
+30/06/2026,2903,COM.MTTO.CTA.. CUENTAS PERSONALES,30/06/2026,Comisión mantenimiento de cuenta,,8.00,,"4,135.24",OK
+30/06/2026,2904,COM.EM.EDO.CTA. CUENTAS PERSONALES,30/06/2026,Comisión emisión estado de cuenta,,8.00,,"4,127.24",OK
+,,TOTALES,,,,"11,935,716.00","11,935,648.00",,
+,9,N° de movimientos,,,,,,,

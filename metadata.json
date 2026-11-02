@@ -1,0 +1,6 @@
+{
+  "name": "Sistema Bancario Agrícola ONI - Conciliación y Contabilidad Venezuela",
+  "description": "Sistema de gestión y conciliación bancaria para Bancamiga, Banco Mercantil, Banco Plaza y Banco Provincial en Venezuela. Clasificación automática por categorías, conversión de divisas a dólar BCV, asientos contables y exportación a Excel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

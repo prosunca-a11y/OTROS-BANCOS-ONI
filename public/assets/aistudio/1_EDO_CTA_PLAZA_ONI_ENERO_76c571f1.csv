@@ -1,0 +1,9 @@
+﻿Banco Plaza - Consulta de Movimientos (Enero 2026),,,,,,,,
+AGRICOLA ONI C.A.,,,,,,,,
+,,,,,,,,
+#,Fecha,Hora,Referencia,Descripción,Tipo,Monto,Saldo,Saldo anterior (Saldo − Monto)
+1,31/01/2026,23:59:15,000000000,CARGO POR MANTENIMIENTO CTA,Débito,-8.00,354.41,362.41
+2,31/01/2026,23:59:15,000000000,CARGO EMISION EDO DE CUENTA,Débito,-0.70,362.41,363.11
+,,,,,,,,
+"Nota: el PDF lista los movimientos del más reciente al más antiguo (el saldo 362,41 de la fila 2 es previo al cargo de 8,00 de la fila 1).",,,,,,,,
+Valores en azul: transcritos del PDF. El PDF no incluye saldo inicial ni resumen de totales.,,,,,,,,

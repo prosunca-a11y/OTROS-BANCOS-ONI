@@ -1,0 +1,45 @@
+﻿Estado de cuenta corriente amiga - Bancamiga (Junio 2026),,,,,,
+AGRICOLA ONI C.A.,,,,,,
+Código Cuenta: 0172-****-**-*****7319,,,,,,
+Saldo Inicial:,"47,200.37",,,,,
+,,,,,,
+Fecha,Referencia,Descripción,Débito,Crédito,Saldo (según banco),Saldo calculado (incl. saldo inicial)
+12-06-2026,51258896,NC Credito Inmediato,0.00,"3,000,000.00","3,000,000.00","3,047,200.37"
+12-06-2026,51260587,NC Credito Inmediato,0.00,"3,000,000.01","6,000,000.01","6,047,200.38"
+12-06-2026,51261956,NC Credito Inmediato,0.00,"3,000,000.00","9,000,000.01","9,047,200.38"
+12-06-2026,51263050,NC Credito Inmediato,0.00,"3,234,000.00","12,234,000.01","12,281,200.38"
+15-06-2026,2132107877,ND Compra USD Intervencion Digital Bs,"9,848,320.00",0.00,"2,385,680.01","2,432,880.38"
+15-06-2026,3132107918,ND Comision Intervencion Digital,"49,241.60",0.00,"2,336,438.41","2,383,638.78"
+16-06-2026,21774196,ND Credito Inmediato Mismo Cliente,"2,300,000.00",0.00,"36,438.41","83,638.78"
+16-06-2026,21774196,Comisión Crédito Inmediato,"6,900.00",0.00,"29,538.41","76,738.78"
+16-06-2026,1100080246,COBRO DISTRIBUCION Tarjeta débito Empres,"2,962.58",0.00,"26,575.83","73,776.20"
+17-06-2026,54123026,NC Credito Inmediato,0.00,"3,000,000.00","3,026,575.83","3,073,776.20"
+17-06-2026,54123303,NC Credito Inmediato,0.00,"3,500,000.00","6,526,575.83","6,573,776.20"
+17-06-2026,54123654,NC Credito Inmediato,0.00,"3,000,000.00","9,526,575.83","9,573,776.20"
+17-06-2026,54123991,NC Credito Inmediato,0.00,"4,000,000.00","13,526,575.83","13,573,776.20"
+17-06-2026,54124573,NC Credito Inmediato,0.00,"3,500,000.00","17,026,575.83","17,073,776.20"
+17-06-2026,54124998,NC Credito Inmediato,0.00,"4,000,000.00","21,026,575.83","21,073,776.20"
+17-06-2026,54125402,NC Credito Inmediato,0.00,"3,600,000.00","24,626,575.83","24,673,776.20"
+18-06-2026,2130138013,ND Compra USD Intervencion Digital Bs,"12,310,400.00",0.00,"12,316,175.83","12,363,376.20"
+18-06-2026,3130138056,ND Comision Intervencion Digital,"61,552.00",0.00,"12,254,623.83","12,301,824.20"
+19-06-2026,22248677,ND Credito Inmediato Mismo Cliente,"5,000,000.00",0.00,"7,254,623.83","7,301,824.20"
+19-06-2026,22248677,Comisión Crédito Inmediato,"15,000.00",0.00,"7,239,623.83","7,286,824.20"
+19-06-2026,22248746,ND Credito Inmediato Mismo Cliente,"5,000,000.00",0.00,"2,239,623.83","2,286,824.20"
+19-06-2026,22248746,Comisión Crédito Inmediato,"15,000.00",0.00,"2,224,623.83","2,271,824.20"
+22-06-2026,213120222,ND Compra USD Intervencion Digital Bs,"1,846,560.00",0.00,"378,063.83","425,264.20"
+22-06-2026,313120225,ND Comision Intervencion Digital,"9,232.80",0.00,"368,831.03","416,031.40"
+26-06-2026,986885307,NC Transf. Distinto cliente Internet,0.00,"12,050,000.00","12,418,831.03","12,466,031.40"
+26-06-2026,367690,Salida de Fondos BCV,"12,030,000.00",0.00,"388,831.03","436,031.40"
+26-06-2026,367690,ND Comisión Transferencia LBTR,397.00,0.00,"388,434.03","435,634.40"
+30-06-2026,22971854,ND Credito Inmediato Dist Cliente,"273,000.00",0.00,"115,434.03","162,634.40"
+30-06-2026,22971854,Comisión Crédito Inmediato,819.00,0.00,"114,615.03","161,815.40"
+30-06-2026,8273556,NC Credito Inmediato,0.00,"273,000.00","387,615.03","434,815.40"
+30-06-2026,23018858,ND Credito Inmediato Dist Cliente,"300,000.00",0.00,"87,615.03","134,815.40"
+30-06-2026,23018858,Comisión Crédito Inmediato,900.00,0.00,"86,715.03","133,915.40"
+30-06-2026,300500,Mantenimiento de Cuenta,0.10,0.00,"86,714.93","133,915.30"
+30-06-2026,481734,Emision Estado de Cuenta,8.00,0.00,"86,706.93","133,907.30"
+30-06-2026,636923,Envio de SMS,8.00,0.00,"86,698.93","133,899.30"
+,,TOTALES,"49,070,301.08","49,157,000.01",,
+,,,,,,
+"Nota: el saldo del banco (col. F) arranca en 0 y no incluye el saldo inicial de 47.200,37; por eso la diferencia (col. H) es constante en -47.200,37.",,,,,,
+Valores en azul: transcritos del PDF. Descripciones tal como aparecen en el estado de cuenta.,,,,,,

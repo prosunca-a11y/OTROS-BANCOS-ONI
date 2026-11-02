@@ -1,0 +1,19 @@
+﻿Banco Plaza - Consulta de Movimientos (Febrero 2026),,,,,,,,
+AGRICOLA ONI C.A.,,,,,,,,
+,,,,,,,,
+#,Fecha,Hora,Referencia,Descripción,Tipo,Monto,Saldo,Saldo anterior (Saldo − Monto)
+1,28/02/2026,23:59:15,000000000,CARGO POR MANTENIMIENTO CTA,Débito,-8.00,"7,420.43","7,428.43"
+2,28/02/2026,23:59:15,000000000,CARGO EMISION EDO DE CUENTA,Débito,-0.70,"7,428.43","7,429.13"
+3,25/02/2026,14:25:26,004089524,TRF PLAZA V021392499 MARYAN,Débito,"-800,000.00","7,429.13","807,429.13"
+4,25/02/2026,14:02:55,004089314,COM. TRF REF. 004089314,Débito,"-3,000.00","807,429.13","810,429.13"
+5,25/02/2026,14:02:55,004089314,TRF VZLA V021392499 MARYAM S,Débito,"-1,000,000.00","810,429.13","1,810,429.13"
+6,25/02/2026,14:01:34,004089294,COM. TRF REF. 004089294,Débito,-792.15,"1,810,429.13","1,811,221.28"
+7,25/02/2026,14:01:34,004089294,TRF VZLA V020105311 BLANCA C,Débito,"-264,050.20","1,811,221.28","2,075,271.48"
+8,25/02/2026,13:18:56,004088986,COM. TRF REF. 004088986,Débito,"-3,000.00","2,075,271.48","2,078,271.48"
+9,25/02/2026,13:18:56,004088986,TRF VZLA V021392499 MARYAM S,Débito,"-1,000,000.00","2,078,271.48","3,078,271.48"
+10,25/02/2026,12:45:17,004088760,TRF VZLA V021392499 MARYAM S,Débito,"-54,682.96","3,078,435.53","3,133,118.49"
+11,25/02/2026,12:45:17,004088760,COM. TRF REF. 004088760,Débito,-164.05,"3,078,271.48","3,078,435.53"
+12,25/02/2026,12:10:12,041707052,TRF PLAZA J306437037 DISTRIBUI,Crédito,"3,132,764.08","3,133,118.49",354.41
+,,,,,,,,
+Nota: el PDF lista los movimientos del más reciente al más antiguo. Excepción: filas 10 y 11 (misma ref. 004088760) aparecen en orden cronológico inverso al resto de pares TRF/COM.,,,,,,,,
+Valores en azul: transcritos del PDF. Descripciones tal como aparecen (algunos nombres vienen truncados por el banco). El PDF no incluye saldo inicial ni resumen de totales.,,,,,,,,
