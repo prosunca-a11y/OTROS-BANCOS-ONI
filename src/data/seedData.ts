@@ -1112,9 +1112,10 @@ export const SEED_INITIAL_BALANCES: Record<string, number> = {
 
 // Saldos de Cierre extraídos oficialmente de los Estados de Cuenta de Agosto 2026
 export const SEED_STATEMENT_CLOSING_BALANCES: Record<string, number> = {
+  banesco: 999278.00,
   bancamiga: 53949.89,
-  mercantil: 36508.16,
-  plaza: 4903.85,
+  mercantil: 41917.77,
+  plaza: 2570.00,
   provincial: 3993.14
 };
 
